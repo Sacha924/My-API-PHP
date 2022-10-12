@@ -1,8 +1,9 @@
-<!-- ce fichier va me servir à gérer les demandes recus via les url, donc ce sera mon fichier de rootage -->
 <?php
+require_once("transferData.php");
+
 // différents points d'entrées : 
-//www.monsite.fr/formations 
-//www.monsite.fr/formations/:caté (:caté = php, solidity, etc)
+//www.monsite.fr/formations                                             FirstEntryPoint
+//www.monsite.fr/formations/:caté (:caté = php, solidity, etc)          SecondEntryPoint
 //www.monsite.fr/formation/:id
 //En réalité on va les traiter de la façon suivante : //www.monsite.fr/index.php?demande=formations Pour cela on a besoin d'un fichier htaccess
 
@@ -13,12 +14,18 @@ try{
         switch($url[0]) {
             case "formations":
                 echo "formations";
-                if(empty($url[1])){
+                if(empty($url[1])){     //FirstEntryPoint
                     getFormations();
+                } else{                 //SecondEntryPoint
+                    getFormationsByCategorie($url[1]);
                 }
             break;
             case "formation":
-                echo "formation";
+                if(!empty($url[1])){ 
+                    getFormationById($url[1]);
+                }else{
+                    throw new Exception ("Demande non valide, l'id de la formation n'estpas renseigné");
+                }
             break;
             default: throw new Exception ("Demande non valide, erreur d'url?");
             
