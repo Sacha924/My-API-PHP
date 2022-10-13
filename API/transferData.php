@@ -6,9 +6,6 @@ function getFormations(){
     $stmt = $pdo->prepare($req);    //Prepares a statement for execution (to be executed by the PDOStatement::execute() method) and returns a statement object
     $stmt->execute();
     $formations = $stmt->fetchAll(PDO::FETCH_ASSOC); //Fetches the remaining rows from a result set.  returns an array containing all of the remaining rows in the result set. The array represents each row as either an array of column values or an object with properties corresponding to each column name. An empty array is returned if there are zero results to fetch.
-    // for($i=0;$i< count($formations);$i++){
-    //     $formations[$i]['image'] = URL."images/cours/".$formations[$i]['image'];
-    // }
     $stmt->closeCursor();
     sendJSON($formations);
 }
@@ -19,9 +16,6 @@ function getFormationsByCategorie($categorie){
     $stmt->bindValue(":categorie",$categorie,PDO::PARAM_STR);   //Permet de faire la liaison entre la variable sql :categorie et notre variable de fonction $categorie
     $stmt->execute();
     $formations = $stmt->fetchAll(PDO::FETCH_ASSOC); 
-    // for($i=0;$i< count($formations);$i++){
-    //     $formations[$i]['image'] = URL."images/cours/".$formations[$i]['image'];
-    // }
     $stmt->closeCursor();
     sendJSON($formations);
 }
@@ -32,9 +26,6 @@ function getFormationById($id){
     $stmt->bindValue(":id",$id,PDO::PARAM_INT);
     $stmt->execute();
     $formations = $stmt->fetchAll(PDO::FETCH_ASSOC); 
-    // for($i=0;$i< count($formations);$i++){
-    //     $formations[$i]['image'] = URL."images/cours/".$formations[$i]['image'];
-    // }
     $stmt->closeCursor();
     sendJSON($formations);
 }

@@ -13,7 +13,6 @@ try{
         // explode(string $separator, string $string, int $limit = PHP_INT_MAX): array
         switch($url[0]) {
             case "formations":
-                echo "formations";
                 if(empty($url[1])){     //FirstEntryPoint
                     getFormations();
                 } else{                 //SecondEntryPoint
